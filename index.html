@@ -110,9 +110,11 @@
 
 <main id="main">
 <section class="hero" id="home">
-  <div class="hero__media"><div class="heroslide is-active" aria-hidden="false"><img src="assets/img/hero-poster.jpg" alt="" width="1920" height="1072" fetchpriority="high"><video id="heroVideo" muted loop playsinline preload="none" poster="assets/img/hero-poster.jpg" aria-hidden="true">
-          <source src="assets/video/backdrop.webm" type="video/webm">
+  <div class="hero__media"><div class="heroslide is-active" aria-hidden="false"><img src="assets/img/hero-poster.jpg" alt="" width="1920" height="1072" fetchpriority="high"><video id="heroVideo" autoplay muted loop playsinline
+               preload="metadata" poster="assets/img/hero-poster.jpg" aria-hidden="true"
+               disablepictureinpicture disableremoteplayback>
           <source src="assets/video/backdrop.mp4" type="video/mp4">
+          <source src="assets/video/backdrop.webm" type="video/webm">
         </video></div></div>
   <div class="hero__scrim"></div>
 

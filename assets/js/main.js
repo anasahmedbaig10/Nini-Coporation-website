@@ -692,6 +692,19 @@
       video.preload = 'auto';
       video.load();
 
+      /* Last resort for phones that refuse gesture-free playback anyway —
+         iOS Low Power Mode and Android Data Saver both do. The first tap
+         anywhere starts it; the poster is showing until then, so nothing
+         looks broken if the visitor never taps. */
+      var kickstart = function () {
+        if (!video.paused) return;
+        var p = video.play();
+        if (p && p.catch) p.catch(function () {});
+      };
+      ['touchstart', 'pointerdown'].forEach(function (evt) {
+        document.addEventListener(evt, kickstart, { once: true, passive: true });
+      });
+
       /* retry when the tab returns to the foreground */
       document.addEventListener('visibilitychange', function () {
         if (document.visibilityState === 'visible' && video.paused && video.readyState >= 2) {

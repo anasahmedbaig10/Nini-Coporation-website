@@ -578,9 +578,15 @@ def build_index():
     slide_html = ""
     copy_html = ""
     for i, (img, has_video, l1, l2, sub) in enumerate(slides):
-        vid = (f'''<video id="heroVideo" muted loop playsinline preload="none" poster="assets/img/{img}" aria-hidden="true">
-          <source src="assets/video/backdrop.webm" type="video/webm">
+        # `autoplay` must be a real attribute, not just a JS .play() call:
+        # iOS Safari only grants gesture-free playback to a muted + playsinline
+        # element that declares it, and preload="none" gave it nothing to start
+        # from. H.264 is listed first because Safari's WebM support is patchy.
+        vid = (f'''<video id="heroVideo" autoplay muted loop playsinline
+               preload="metadata" poster="assets/img/{img}" aria-hidden="true"
+               disablepictureinpicture disableremoteplayback>
           <source src="assets/video/backdrop.mp4" type="video/mp4">
+          <source src="assets/video/backdrop.webm" type="video/webm">
         </video>''' if has_video else "")
         loadattr = ' fetchpriority="high"' if i == 0 else ' loading="lazy"'
         # First slide is marked active in the markup so the hero paints
