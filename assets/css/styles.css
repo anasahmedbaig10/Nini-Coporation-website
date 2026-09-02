@@ -1242,9 +1242,58 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
 }
 
 @media (max-width: 640px) {
+  /* --- phone density -----------------------------------------------------
+     The desktop type scale and rhythm were making the hero taller than the
+     screen and the page 16 screens deep. These are phone-only overrides;
+     nothing above 640px changes. */
+
+  /* 44px pushed the headline to four lines on a 375px screen */
+  .h1 { font-size: clamp(1.95rem, 8.4vw, 2.55rem); line-height: 1.04; }
+  .h2 { font-size: clamp(1.6rem, 6.4vw, 2rem); }
+  .h3 { font-size: clamp(1.35rem, 5vw, 1.6rem); }
+  .eyebrow { font-size: .95rem; margin-bottom: .8rem; }
+  .lead { font-size: 1rem; }
+  .hero__sub { font-size: 1rem; }
+
+  /* hero should sit inside one screen, not spill past it */
+  .hero { min-height: auto; }
+  .hero__inner { padding-top: calc(var(--header-h) + 1.25rem); padding-bottom: 2rem; }
+  .hero__actions { margin-top: 1.5rem; }
+  .hero__sub { margin-top: 1.1rem; }
+  .hero__videocard { display: none; }   /* the film is the background here */
+
+  /* tighter vertical rhythm between and inside sections.
+     --gap must be declared on a selector; a bare declaration inside a media
+     query is invalid and is dropped without warning. */
+  :root { --gap: 2.25rem; }
+  .section--pad { padding-block: .75rem; }
+  .expertise { padding-block: 2rem; }
+  .statement, .statement--wide { max-width: none; }
+
+  /* Stacked imagery was the real cost: a 4:3 photo under every text block
+     added most of a screen each time. Landscape crops keep the picture
+     without the height. */
+  .split, .split--text-first, .portal__grid { gap: 1.75rem; }
+  .feature__media img { aspect-ratio: 16/10; }
+  .quicklink { min-height: 230px; }
+  .approach__item, .logogrid__cell, .cat { padding: 1.4rem 1.2rem; }
+  .feature__list { gap: .8rem; }
+  .product--wide { aspect-ratio: 16/10; }
+  .reportcard { padding: 1.2rem; }
+  .weaveband { min-height: 260px; }
+
+  /* The closing call-to-action repeats a photograph already shown twice
+     above. On a phone it costs most of a screen and tells the reader
+     nothing new, so the band goes text-only here. */
+  .section:last-of-type .feature__media { display: none; }
+
+  .statrow__item { padding: 1.3rem 1.2rem; }
+  .cat__list { gap: .35rem .8rem; }
+  .testi__slide { padding-right: 0; }
+
   /* the badge is part of the brand, not decoration — keep it, scaled down */
-  .roundel { width: 68px; height: 68px; margin-bottom: 1rem; }
-  .roundel img { width: 28px; }
+  .roundel { width: 62px; height: 62px; margin-bottom: .9rem; }
+  .roundel img { width: 26px; }
   .roundel__spin text { font-size: 9.5px; }
   .approach, .approach--8, .process, .process--6,
   .products, .logogrid, .footer__top, .statrow { grid-template-columns: 1fr; }
