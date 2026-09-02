@@ -1,0 +1,14 @@
+# Original source assets — 275 MB of 4096px PNGs and the 15 MB HEVC master.
+# Individual files exceed GitHub's 100 MB warning threshold and none of it is
+# needed to serve the site; the optimised versions live in assets/.
+Nini Coporation/
+
+# Build outputs that are regenerated, not authored
+_preview/
+preview-single-file.html
+nini-website-preview.zip
+
+# Local tooling
+.claude/
+__pycache__/
+*.pyc
