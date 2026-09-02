@@ -273,8 +273,8 @@ body.mega-open .hero__scrim { background: rgba(0,0,0,.75); transition: backgroun
 .hero__title { max-width: 15ch; }
 .hero__title em { font-style: normal; color: var(--accent); display: block; }
 
-.hero__row { display: flex; align-items: flex-end; gap: 2rem; flex-wrap: wrap; }
-.hero__left { flex: 1 1 520px; }
+.hero__row { display: flex; align-items: flex-end; }
+.hero__left { flex: 1 1 auto; max-width: 62ch; }
 .hero__sub { margin-top: 1.6rem; max-width: 50ch; color: rgba(255,255,255,.84); }
 .hero__actions { margin-top: 2.2rem; display: flex; gap: .9rem; flex-wrap: wrap; align-items: center; }
 
@@ -289,30 +289,6 @@ body.mega-open .hero__scrim { background: rgba(0,0,0,.75); transition: backgroun
 .roundel__spin text { font-size: 8.2px; font-weight: 700; letter-spacing: .09em; fill: #10200A; }
 .roundel img { width: 46px; height: auto; }
 @keyframes spin { to { transform: rotate(360deg); } }
-
-/* video thumbnail bottom-right, as per reference */
-.hero__videocard {
-  position: relative; flex: 0 0 auto; width: min(320px, 42vw);
-  aspect-ratio: 16/10; overflow: hidden; border-radius: 2px;
-}
-.hero__videocard img { width: 100%; height: 100%; object-fit: cover; }
-.hero__videocard::after {
-  content: ""; position: absolute; inset: 0; background: rgba(0,0,0,.35);
-  transition: background var(--dur) var(--ease);
-}
-.hero__videocard:hover::after { background: rgba(0,0,0,.15); }
-.hero__playbadge {
-  position: absolute; inset: 0; margin: auto;
-  width: 84px; height: 84px; z-index: 2;
-  display: grid; place-items: center;
-}
-.hero__playbadge .spin { position: absolute; inset: 0; animation: spin 16s linear infinite; }
-.hero__playbadge .spin text { font-size: 8px; font-weight: 700; letter-spacing: .1em; fill: #fff; }
-.hero__playbadge .tri {
-  width: 0; height: 0; border-left: 15px solid var(--accent);
-  border-top: 9px solid transparent; border-bottom: 9px solid transparent;
-  margin-left: 4px;
-}
 
 .hero__scrollcue {
   display: inline-grid; place-items: center;
@@ -1237,7 +1213,6 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
   .reportcard { transform: none; }
   .roundel { width: 84px; height: 84px; margin-bottom: 1.2rem; }
   .roundel img { width: 34px; }
-  .hero__videocard { width: min(260px, 60vw); }
   .footer__top { grid-template-columns: 1fr 1fr; }
 }
 
@@ -1260,7 +1235,6 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
   .hero__inner { padding-top: calc(var(--header-h) + 1.25rem); padding-bottom: 2rem; }
   .hero__actions { margin-top: 1.5rem; }
   .hero__sub { margin-top: 1.1rem; }
-  .hero__videocard { display: none; }   /* the film is the background here */
 
   /* tighter vertical rhythm between and inside sections.
      --gap must be declared on a selector; a bare declaration inside a media
@@ -1304,7 +1278,6 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
   .gallery__item--lg { grid-row: span 1; aspect-ratio: 16/10; }
   .form__grid { grid-template-columns: 1fr; }
   .hero__row { flex-direction: column; align-items: flex-start; }
-  .hero__videocard { width: 100%; max-width: 340px; }
   .pill { width: 100%; justify-content: center; }
   .hero__actions .pill { width: auto; flex: 1 1 auto; }
 }
@@ -1318,7 +1291,7 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
   .reveal, .js .reveal,
   .stagger > *, .js .stagger > * { opacity: 1 !important; transform: none !important; }
   .hero__media video { display: none; }
-  .roundel__spin, .hero__playbadge .spin, .float { animation: none !important; }
+  .roundel__spin, .float { animation: none !important; }
   .hero__media { transform: none !important; }   /* no parallax */
   .tilt3d__inner { transform: none !important; } /* no pointer tilt */
 }

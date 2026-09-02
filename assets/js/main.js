@@ -718,7 +718,6 @@
   /* --- lightbox --------------------------------------------------------- */
   var lightbox = document.getElementById('lightbox');
   var lbImg = document.getElementById('lbImg');
-  var lbVideo = document.getElementById('lbVideo');
   var lbCap = document.getElementById('lbCap');
   var lbClose = document.getElementById('lbClose');
   var lastFocused = null;
@@ -727,17 +726,7 @@
     if (!lightbox) return;
     lastFocused = trigger || null;
 
-    if (opts.video) {
-      lbImg.style.display = 'none';
-      lbImg.removeAttribute('src');
-      lbVideo.style.display = 'block';
-      /* setting currentTime before load throws InvalidStateError */
-      try { lbVideo.currentTime = 0; } catch (err) {}
-      var p = lbVideo.play();
-      if (p && p.catch) p.catch(function () { /* controls remain available */ });
-    } else {
-      lbVideo.pause();
-      lbVideo.style.display = 'none';
+    {
       lbImg.style.display = 'block';
       lbImg.src = opts.src;
       lbImg.alt = opts.caption || '';
@@ -753,7 +742,6 @@
     if (!lightbox) return;
     lightbox.classList.remove('is-open');
     document.body.style.overflow = '';
-    lbVideo.pause();
     lbImg.removeAttribute('src');
     if (lastFocused) lastFocused.focus();
   }
@@ -763,13 +751,6 @@
       openLightbox({ src: btn.getAttribute('data-lightbox'), caption: btn.getAttribute('data-caption') }, btn);
     });
   });
-
-  var playFilm = document.getElementById('playFilm');
-  if (playFilm) {
-    playFilm.addEventListener('click', function () {
-      openLightbox({ video: true, caption: 'Nini Corporation' }, playFilm);
-    });
-  }
 
   if (lbClose) lbClose.addEventListener('click', closeLightbox);
   if (lightbox) lightbox.addEventListener('click', function (e) { if (e.target === lightbox) closeLightbox(); });
@@ -967,7 +948,7 @@
       closeNav();
     }
     if (e.key === 'Tab' && lightbox && lightbox.classList.contains('is-open')) {
-      var focusables = lightbox.querySelectorAll('button, video[controls]');
+      var focusables = lightbox.querySelectorAll('button');
       if (focusables.length < 2) { e.preventDefault(); if (lbClose) lbClose.focus(); }
     }
   });

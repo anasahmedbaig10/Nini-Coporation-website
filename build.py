@@ -206,10 +206,6 @@ LIGHTBOX = '''<div class="lightbox" id="lightbox" role="dialog" aria-modal="true
   </button>
   <div>
     <img id="lbImg" src="" alt="">
-    <video id="lbVideo" controls muted loop playsinline style="display:none;max-height:86vh">
-      <source src="assets/video/backdrop.webm" type="video/webm">
-      <source src="assets/video/backdrop.mp4" type="video/mp4">
-    </video>
     <p class="lightbox__cap" id="lbCap"></p>
   </div>
 </div>'''
@@ -583,7 +579,7 @@ def build_index():
         # element that declares it, and preload="none" gave it nothing to start
         # from. H.264 is listed first because Safari's WebM support is patchy.
         vid = (f'''<video id="heroVideo" autoplay muted loop playsinline
-               preload="metadata" poster="assets/img/{img}" aria-hidden="true"
+               preload="auto" poster="assets/img/{img}" aria-hidden="true"
                disablepictureinpicture disableremoteplayback>
           <source src="assets/video/backdrop.mp4" type="video/mp4">
           <source src="assets/video/backdrop.webm" type="video/webm">
@@ -627,16 +623,6 @@ def build_index():
         <p class="eyebrow">Sourcing · Inspection · Compliance since {SITE['founded']}</p>
         <div class="hero__copy">{copy_html}</div>
       </div>
-      <button class="hero__videocard" type="button" id="playFilm" aria-label="Play the Nini Corporation film">
-        <img src="assets/img/process-inspection.jpg" alt="" width="1920" height="1072">
-        <span class="hero__playbadge">
-          <svg class="spin" viewBox="0 0 100 100" aria-hidden="true">
-            <defs><path id="playPath" d="M 50,50 m -36,0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0"></path></defs>
-            <text><textPath href="#playPath">PLAY FULL VIDEO · PLAY FULL VIDEO · </textPath></text>
-          </svg>
-          <span class="tri"></span>
-        </span>
-      </button>
     </div>
   </div>
 </section>
