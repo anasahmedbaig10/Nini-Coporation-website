@@ -1113,6 +1113,64 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
 .prose p { color: var(--muted); margin-bottom: 1rem; }
 .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
 
+/* --- 20d3. Device frames for app / portal screenshots -------------------- */
+/* Real screenshots need a frame or they read as loose rectangles. These stay
+   empty until APP_SHOTS is filled in — see build.py. */
+.devices {
+  position: relative;
+  display: grid; place-items: center;
+  perspective: 1600px;
+}
+
+/* browser window holding the portal screenshot */
+.device-browser {
+  width: 100%; border-radius: 8px; overflow: hidden;
+  background: #0C0E0A; border: 1px solid var(--line);
+  box-shadow: 0 44px 90px -34px rgba(0,0,0,.95), 0 0 0 1px rgba(140,193,99,.12);
+  transform: perspective(1600px) rotateY(-7deg) rotateX(3deg);
+  transform-style: preserve-3d;
+  transition: transform .7s var(--ease);
+}
+.devices:hover .device-browser { transform: perspective(1600px) rotateY(-2deg) rotateX(1deg); }
+.device-browser__bar {
+  display: flex; align-items: center; gap: .45rem;
+  padding: .6rem .8rem; background: #14170F;
+  border-bottom: 1px solid var(--line-soft);
+}
+.device-browser__bar i {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: rgba(255,255,255,.18); flex: none;
+}
+.device-browser__bar span {
+  margin-left: .5rem; font-size: .68rem; letter-spacing: .06em;
+  color: var(--muted-soft); font-style: normal;
+}
+.device-browser img { width: 100%; display: block; }
+
+/* phone holding the inspection-app screenshot, overlapping the browser */
+.device-phone {
+  position: absolute; right: -6%; bottom: -8%;
+  width: 30%; min-width: 132px;
+  border-radius: 20px; overflow: hidden;
+  background: #050604; border: 1px solid rgba(255,255,255,.22);
+  box-shadow: 0 34px 60px -22px rgba(0,0,0,.95);
+  transform: perspective(1200px) rotateY(-11deg) translateZ(60px);
+  transition: transform .7s var(--ease);
+}
+.devices:hover .device-phone { transform: perspective(1200px) rotateY(-5deg) translateZ(80px); }
+.device-phone::before {
+  content: ""; position: absolute; top: 7px; left: 50%; translate: -50% 0;
+  width: 32%; height: 4px; border-radius: 4px;
+  background: rgba(255,255,255,.28); z-index: 2;
+}
+.device-phone img { width: 100%; display: block; }
+
+@media (max-width: 640px) {
+  .device-browser, .device-phone { transform: none; }
+  .device-phone { position: relative; right: auto; bottom: auto; width: 58%; margin-top: -12%; }
+  .devices { justify-items: start; }
+}
+
 /* --- 20e. Client portal feature ----------------------------------------- */
 .portal { position: relative; }
 .portal__grid {

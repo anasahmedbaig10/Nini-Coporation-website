@@ -46,6 +46,19 @@ APP = {
     "portal_login":   "",
 }
 
+# ── App / portal screenshots ────────────────────────────────────────────────
+# The QMS is in final development and deploys before this site goes public.
+# When you have screenshots: drop the files in assets/img/ and put the
+# filenames here, then run `python build.py`. Blank keeps the stylised report
+# card, so the page is never showing an empty frame.
+#
+#   portal  a wide screenshot of the web portal (dashboard or report list)
+#   app     a tall phone screenshot of the inspection app
+APP_SHOTS = {
+    "portal": "",     # e.g. "portal-dashboard.jpg"
+    "app":    "",     # e.g. "app-inspection.jpg"
+}
+
 PDF_HREF     = APP["capability_pdf"] or "nini-corporation-capability-statement.pdf"
 PDF_DOWNLOAD = "" if APP["capability_pdf"] else " download"
 ENQUIRY_HREF = APP["enquiry_url"] or "contact.html#quote"
@@ -479,6 +492,27 @@ REPORT_CARD = '''<div class="reportcard">
 
 FORM_ACTION = f' action="{APP["enquiry_api"]}" method="POST"' if APP["enquiry_api"] else ''
 
+def app_visual():
+    """Screenshots in device frames once APP_SHOTS is filled; until then the
+    stylised report card, so the section never shows an empty frame."""
+    if not APP_SHOTS["portal"] and not APP_SHOTS["app"]:
+        return REPORT_CARD
+
+    browser = ""
+    if APP_SHOTS["portal"]:
+        browser = (f'<div class="device-browser">'
+                   f'<div class="device-browser__bar"><i></i><i></i><i></i>'
+                   f'<span>portal.ninicorporation.com</span></div>'
+                   f'<img src="assets/img/{APP_SHOTS["portal"]}" '
+                   f'alt="Nini Corporation client portal" loading="lazy"></div>')
+    phone = ""
+    if APP_SHOTS["app"]:
+        phone = (f'<div class="device-phone">'
+                 f'<img src="assets/img/{APP_SHOTS["app"]}" '
+                 f'alt="Nini Corporation inspection app" loading="lazy"></div>')
+    return f'<div class="devices">{browser}{phone}</div>'
+
+
 CONTACT_FORM = f'''<form class="form reveal reveal-d1" id="quoteForm" novalidate{FORM_ACTION}>
   <div class="form__grid">
     <div class="field"><label for="f-name">Full name <span class="req">*</span></label>
@@ -696,7 +730,7 @@ def build_index():
         </ul>
         <div style="margin-top:2rem"><a class="pill" href="portal.html">See How It Works {ARROW}</a></div>
       </div>
-      <div class="reveal reveal--depth reveal-d1">{REPORT_CARD}</div>
+      <div class="reveal reveal--depth reveal-d1">{app_visual()}</div>
     </div>
   </div>
 </section>
@@ -954,9 +988,9 @@ def build_subpages():
         "Four-point inspection, lab-verified yarn testing, daily in-line inspection and pre-shipment inspection.", body)
 
     # Portal — the differentiator. Detail drawn from the QMS development brief.
-    # TODO: confirm which features are live before publishing. The source
-    # document is a specification ("Develop a mobile application…"), so any
-    # capability still in build should be worded as coming, not delivered.
+    # The system is in final development and deploys BEFORE this site goes
+    # public, so present tense is correct here. Screenshots slot in via
+    # APP_SHOTS at the top of this file.
     body = page_hero("Our Quality Management System",
                      "A mobile inspection app for our auditors and a web portal for you — one cloud system covering every inspection, report and quality record.",
                      "assets/img/process-inspection.jpg", "Client Portal &amp; Reporting") + f'''
@@ -980,7 +1014,7 @@ def build_subpages():
         </ul>
         <div style="margin-top:2rem"><a class="pill" href="contact.html#quote">Ask for a Demo {ARROW}</a></div>
       </div>
-      <div class="reveal reveal--depth reveal-d1">{REPORT_CARD}</div>
+      <div class="reveal reveal--depth reveal-d1">{app_visual()}</div>
     </div>
   </div>
 </section>
