@@ -686,13 +686,13 @@ def build_index():
   <div class="container">
     <div class="portal__grid">
       <div class="reveal">
-        <p class="eyebrow">Client Portal &amp; Reporting</p>
-        <h2 class="h2 statement">You Should Not Have to Ask Where Your Order Is</h2>
-        <p class="lead" style="margin-top:1.3rem">Our inspectors work from a dedicated quality inspection app on the factory floor. Findings become a PDF report, and clients follow progress through a web portal with their own login.</p>
+        <p class="eyebrow">What Sets Us Apart</p>
+        <h2 class="h2 statement">Our Inspection App and Client Portal</h2>
+        <p class="lead" style="margin-top:1.3rem">This is the difference between us and every other buying house you could appoint. Not a promise that quality is being watched — a system that proves it, inspection by inspection.</p>
         <ul class="feature__list" style="margin-top:1.6rem">
-          <li>{TICK}<span><strong>Inspection app on site.</strong> Inspectors record findings against your standard at the point of inspection, not from memory afterwards.</span></li>
-          <li>{TICK}<span><strong>PDF reports.</strong> Every inspection produces a documented report you can file, forward or challenge.</span></li>
-          <li>{TICK}<span><strong>Web portal access.</strong> Live online updates with a unique user ID and password, alongside weekly status reports.</span></li>
+          <li>{TICK}<span><strong>A mobile app our auditors work from</strong> — AQL sample sizes and accept/reject limits calculated, pass or fail decided against the standard, every defect photographed and tagged.</span></li>
+          <li>{TICK}<span><strong>A web portal for you</strong> — every report searchable by PO, item, vendor or date, with vendor pass rates and defect trends built from your own order history.</span></li>
+          <li>{TICK}<span><strong>The report before the auditor leaves the factory</strong> — signed on site by inspector and factory representative, issued as PDF, in your portal the same day.</span></li>
         </ul>
         <div style="margin-top:2rem"><a class="pill" href="portal.html">See How It Works {ARROW}</a></div>
       </div>
@@ -712,6 +712,7 @@ def build_index():
           <li>{TICK}<span><strong>Daily quality control.</strong> In-line inspection, shade approvals and production monitoring, every day of the order cycle.</span></li>
           <li>{TICK}<span><strong>International reach.</strong> Trusted across Europe, the UK and North America for over two decades.</span></li>
           <li>{TICK}<span><strong>On time, every time.</strong> Lead-time planning and weekly status reporting keep every shipment on schedule.</span></li>
+          <li>{TICK}<span><strong>Our own quality management system.</strong> A mobile inspection app and client portal that no comparable buying house in the region offers.</span></li>
         </ul>
         <div style="margin-top:2rem"><a class="pill pill--ghost" href="why-choose-us.html">More Reasons {ARROW}</a></div>
       </div>
@@ -812,7 +813,7 @@ def build_subpages():
       ("03","International Reach","Trusted by clients across Europe, the United Kingdom and North America for over two decades."),
       ("04","On Time, Every Time","Lead-time planning and weekly status reporting keep every shipment on schedule."),
       ("05","Single Accountability","One team owns sourcing, quality, compliance and shipment — no finger-pointing between agent, mill and forwarder."),
-      ("06","Documented Evidence","Photographic inspection reports and a client portal, so every claim we make is something you can check."),
+      ("06","Our Own Quality Management System","A mobile inspection app our auditors work from and a web portal you log into — automated AQL, photographic evidence, instant PDF reports and searchable quality history. Our single biggest point of difference."),
     ], "approach--8")}
   </div>
 </section>
@@ -952,33 +953,103 @@ def build_subpages():
     sizes["quality-assurance.html"] = render("quality-assurance.html", f"Quality Assurance | {SITE['name']}",
         "Four-point inspection, lab-verified yarn testing, daily in-line inspection and pre-shipment inspection.", body)
 
-    # Portal
-    body = page_hero("Client Portal &amp; Inspection Reporting",
-                     "Our inspectors work from a dedicated quality inspection app. Findings become a PDF report, and you follow progress through a portal with your own login.",
+    # Portal — the differentiator. Detail drawn from the QMS development brief.
+    # TODO: confirm which features are live before publishing. The source
+    # document is a specification ("Develop a mobile application…"), so any
+    # capability still in build should be worded as coming, not delivered.
+    body = page_hero("Our Quality Management System",
+                     "A mobile inspection app for our auditors and a web portal for you — one cloud system covering every inspection, report and quality record.",
                      "assets/img/process-inspection.jpg", "Client Portal &amp; Reporting") + f'''
 <section class="section portal">
   <div class="container">
     <div class="portal__grid">
       <div class="reveal">
-        <p class="eyebrow">How It Works</p>
+        <p class="eyebrow">Why It Matters</p>
         <h2 class="h2 statement">Evidence, Not Reassurance</h2>
-        <p class="body" style="margin-top:1.2rem">Most buying houses tell you an order is on track. We show you. Inspections are recorded on site in our inspection app, turned into a documented PDF report, and published to your portal alongside weekly status updates.</p>
+        <p class="body" style="margin-top:1.2rem">
+          Most buying houses tell you an order is on track. Ours shows you. Our auditors work
+          from a mobile inspection app on the factory floor — AQL sample sizes calculated for
+          them, pass and fail decided against the standard rather than by judgement, every
+          defect photographed and tagged. The report is generated on the spot and lands in your
+          portal, not in an inbox three days later.
+        </p>
         <ul class="feature__list" style="margin-top:1.6rem">
-          <li>{TICK}<span><strong>Recorded at the point of inspection</strong> — against your standard, on the factory floor, not written up from memory afterwards.</span></li>
-          <li>{TICK}<span><strong>PDF reports</strong> you can file, forward to your team, or put back to the mill.</span></li>
-          <li>{TICK}<span><strong>Portal access</strong> with a unique user ID and password, plus weekly status reports by email.</span></li>
+          <li>{TICK}<span><strong>Recorded at the point of inspection</strong> — on the factory floor, against your standard, not written up from memory afterwards.</span></li>
+          <li>{TICK}<span><strong>Nothing depends on arithmetic under pressure.</strong> Sample sizes and accept/reject limits are computed, not worked out by hand on a clipboard.</span></li>
+          <li>{TICK}<span><strong>Searchable history</strong> by PO, item, vendor, factory, inspector or date — so a recurring defect is visible as a pattern, not a surprise.</span></li>
         </ul>
-        <!-- TODO: expand with the real product details — app name, what the
-             reports contain, whether the portal is live, and screenshots. -->
         <div style="margin-top:2rem"><a class="pill" href="contact.html#quote">Ask for a Demo {ARROW}</a></div>
       </div>
       <div class="reveal reveal--depth reveal-d1">{REPORT_CARD}</div>
     </div>
   </div>
 </section>
+
+<section class="section">
+  <div class="container">
+    <div class="section--pad">
+      <p class="eyebrow reveal">In the App</p>
+      <h2 class="h2 statement reveal reveal-d1" style="margin-bottom:2.5rem">What Happens on the Factory Floor</h2>
+    </div>
+    {approach_grid([
+      ("01","AQL Calculated, Not Estimated","The auditor enters order quantity, ready quantity and inspection level. Sample size and the major and minor accept/reject limits are derived from the AQL standard automatically."),
+      ("02","Pass or Fail Decided by the Standard","Recorded defects are compared against the acceptance criteria and the result is returned by the system — removing the judgement call that inspection disputes usually turn on."),
+      ("03","Every Defect Photographed","Photos are captured in the app and tagged by category, defect and location, with annotation on the image. Product, packaging, defects and measurements are each covered."),
+      ("04","Measurements Against Tolerance","Entered measurements are checked against your specification and flagged the moment they fall outside tolerance."),
+      ("05","Specifications Recalled, Not Retyped","Entering an item number recalls its construction, GSM, dimensions and packaging from previous inspections. The auditor verifies rather than re-keys."),
+      ("06","Signed on Site","Inspector and factory representative sign on the screen, and both signatures are embedded in the report."),
+      ("07","Works Without Internet","Inspections are saved locally and sync when a connection returns — because a great many factory floors do not have reliable coverage."),
+      ("08","Report Generated On the Spot","One action produces the finished PDF: summary, tagged images, signatures. No retyping into a template afterwards."),
+    ], "approach--8")}
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="split split--text-first">
+      <div class="reveal">
+        <p class="eyebrow">In Your Portal</p>
+        <h2 class="h2 statement">What You See From Your Desk</h2>
+        <p class="body" style="margin-top:1.2rem">
+          The same system that runs the inspection gives you the record of it. Reports are
+          retrievable by PO, item, vendor, customer, inspector or date, and the quality history
+          builds into something you can actually read trends from.
+        </p>
+        <ul class="feature__list" style="margin-top:1.6rem">
+          <li>{TICK}<span><strong>Vendor performance</strong> — pass and fail rates by mill, so you can see which partners hold quality and which drift.</span></li>
+          <li>{TICK}<span><strong>Defect trends</strong> — the recurring faults across a programme, ranked, rather than one report at a time.</span></li>
+          <li>{TICK}<span><strong>Product risk</strong> — the items that repeatedly cause problems, flagged before the next order is placed.</span></li>
+          <li>{TICK}<span><strong>Full report archive</strong> — every inspection, downloadable as the PDF it was issued as.</span></li>
+        </ul>
+      </div>
+      <div class="feature__media reveal reveal--depth reveal-d1 clipreveal">
+        <img src="assets/img/process-production.jpg" alt="Production floor monitored through the quality management system" width="1920" height="1072" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section--pad">
+      <p class="eyebrow reveal">Coverage</p>
+      <h2 class="h2 statement reveal reveal-d1" style="margin-bottom:2.5rem">Every Inspection Stage, One System</h2>
+    </div>
+    <ul class="riskrow stagger">
+      <li>Inline inspection</li>
+      <li>Pre-final inspection</li>
+      <li>Final random inspection (FRI)</li>
+      <li>Loading inspection</li>
+      <li>Re-inspection</li>
+    </ul>
+    <p class="pullquote reveal">
+      One auditor, one device, a complete inspection report before they leave the factory.
+    </p>
+  </div>
+</section>
 {CTA_BAND}'''
-    sizes["portal.html"] = render("portal.html", f"Client Portal &amp; Reporting | {SITE['name']}",
-        "Inspection app, PDF reports and a client web portal with your own login.", body)
+    sizes["portal.html"] = render("portal.html", f"Quality Management System | {SITE['name']}",
+        "A mobile inspection app and client web portal: automated AQL, photographic evidence, instant PDF reports and searchable quality history.", body)
 
     # Products
     cats = '''<article class="cat"><h3 class="h4">Home Textiles</h3>
